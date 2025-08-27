@@ -1,0 +1,101 @@
+DeQueue:
+
+#include<iostream>
+using namespace std;
+void enqueueRear(int ele);
+void dequeueFront();
+void enqueueFront(int ele);
+void dequeueRear();
+void display();
+int queue[100],size=5;
+int front=-1,rear=-1;
+int main()
+{
+	int choice,ele;
+	printf("1.EnqueueRear\n2.DequeueFront\n3.EnqueueFront\n4.DequeueRear\n5.Display\n");
+	while(1)
+	{
+		printf("Choice:");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1: printf("Enter the element: ");
+					scanf("%d",&ele);
+					enqueueRear(ele);
+					break;
+			case 2: dequeueFront();
+					break;
+			case 3: printf("Enter the element: ");
+					scanf("%d",&ele);
+					enqueueFront(ele);
+					break;
+			case 4: dequeueRear();
+					break;
+			case 5: display();
+					break;
+			default: cout<<"Program Terminated!!!";
+					exit(0);
+		}
+	}
+	return 0;
+}
+void enqueueRear(int ele)
+{
+	if(rear==size-1)
+		cout<<"Queue Overflow"<<endl;
+	else if((rear==-1)&&(front==-1))
+		front=rear=0;
+	else
+		rear=rear+1;
+	queue[rear]=ele;
+	display();
+}
+void dequeueFront()
+{
+	if(front==-1)
+		cout<<"Queue Unerflow\n";
+	else 
+	{
+		cout<<"Dequeued Element = "<<queue[front]<<endl;
+		if(front==rear)
+			front=rear=-1;
+		else
+			front++;
+	}
+	display();
+}
+void enqueueFront(int element)
+{
+	if(front<=0)
+		cout<<"Queue Full"<<endl;
+	else
+		queue[--front]=element;
+	display();
+}
+void dequeueRear()
+{
+	if(rear==-1)
+		cout<<"Queue Empty\n";
+	else
+	{
+		cout<<"Dequeued Element at Rear = "<<queue[rear]<<endl;
+		if(front==rear)
+			front=rear=-1;
+		else
+			rear=rear-1;
+	}
+	display();
+}
+void display()
+{
+	int i;
+	if((rear==-1)||(front==-1))
+		cout<<"Queue Empty\n";
+	else
+	{
+		cout<<"Elements: ";
+		for(i=front;i<=rear;i++)
+			cout<<queue[i]<<" ";
+		cout<<endl;
+	}
+}
